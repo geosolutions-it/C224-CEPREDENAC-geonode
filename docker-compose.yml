@@ -72,6 +72,8 @@ services:
     environment:
       UWSGI_CMD: uwsgi --ini /usr/src/cepredenac/uwsgi.ini
       IS_CELERY: 'False'
+    extra_hosts:
+      - "geonode.cepredenac.org:172.67.215.237"
 
   celery:
     restart: unless-stopped
@@ -99,6 +101,8 @@ services:
     environment:
       CELERY_CMD: celery-cmd
       IS_CELERY: 'True'
+    extra_hosts:
+      - "geonode.cepredenac.org:172.67.215.237"
 
   geonode:
     image: geonode/nginx:3.x
@@ -122,6 +126,8 @@ services:
       - statics:/mnt/volumes/statics
     env_file:
       - .env
+    extra_hosts:
+      - "geonode.cepredenac.org:172.67.215.237"
 
   # Gets and installs letsencrypt certificates
   letsencrypt:
